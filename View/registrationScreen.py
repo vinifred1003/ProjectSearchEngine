@@ -45,10 +45,5 @@ class RegistrationScreen(Toplevel):
         self.lbCompany = Label(self, text="Company?", fg="white", bg="gray")
         self.lbCompany.place(relx=0.2, rely=0.60)
 
-        self.entryCompany = Radiobutton(self, variable=self.var,value=1 ,command=self.sel)
+        self.entryCompany = Radiobutton(self, variable=self.var,value=1 )
         self.entryCompany.place (relx=0.15, rely=0.65)
-
-    def sel(self):
-        var =1
-        selection = "You selected the option " + str(self.var.get())
-        
