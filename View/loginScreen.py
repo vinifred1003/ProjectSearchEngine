@@ -2,7 +2,8 @@ import tkinter as tk
 import sys
 from tkinter import *
 from tkinter import font
-from View.registrationScreen import RegistrationScreen
+from .registrationScreen import RegistrationScreen
+
 
 class LoginScreen():
   
@@ -17,7 +18,7 @@ class LoginScreen():
     self.root.mainloop()
   
   def run(self):
-    bg = PhotoImage(file="C:/Users/Aluno/Desktop/ProjectSearchEngine/View/WhiteBackground.png")
+    bg = PhotoImage(file="C:/Users/Aluno/Desktop/Minha_PAsta/ProjectSearchEngine/View/WhiteBackground.png")
     background_label = Label(self.root, image=bg)
     background_label.place(relwidth=1, relheight=1)
     background_label.image = bg  
