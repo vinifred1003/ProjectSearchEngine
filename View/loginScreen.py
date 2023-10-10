@@ -18,7 +18,7 @@ class LoginScreen():
     self.root.mainloop()
   
   def run(self):
-    bg = PhotoImage(file="C:/Users/Aluno/Desktop/Minha_PAsta/ProjectSearchEngine/View/WhiteBackground.png")
+    bg = PhotoImage(file="C:/Users/Aluno/Desktop/ProjectSearchEngine/View/WhiteBackground.png")
     background_label = Label(self.root, image=bg)
     background_label.place(relwidth=1, relheight=1)
     background_label.image = bg  
@@ -31,19 +31,19 @@ class LoginScreen():
     self.FrameLogin.place(relx=0.35, rely=0.10, relwidth=0.30, relheight=0.80) 
             # Aqui você pode adicionar widgets de login dentro do FrameLogin
     label_username = Label(self.FrameLogin, text="Username", font=self.custom_font, bg="#a0a0a0", fg="white")
-    label_username.place(relx=0.25, rely=0.20, relwidth=0.5, relheight=0.05)
+    label_username.place(relx=0.25, rely=0.10, relwidth=0.5, relheight=0.05)
 
     entry_username = Entry(self.FrameLogin)
-    entry_username.place(relx=0.30, rely=0.30, relwidth=0.4, relheight=0.05)
+    entry_username.place(relx=0.30, rely=0.20, relwidth=0.4, relheight=0.05)
 
     label_password = Label(self.FrameLogin, text="Password", font=self.custom_font, bg="#a0a0a0", fg="white")
-    label_password.place(relx=0.25, rely=0.40, relwidth=0.5, relheight=0.05)
+    label_password.place(relx=0.25, rely=0.30, relwidth=0.5, relheight=0.05)
 
     entry_password = Entry(self.FrameLogin, show="*")   
-    entry_password.place(relx=0.30, rely=0.50, relwidth=0.4, relheight=0.05)
+    entry_password.place(relx=0.30, rely=0.40, relwidth=0.4, relheight=0.05)
 
     login_button = Button(self.FrameLogin, text="Login")
-    login_button.place(relx=0.30, rely=0.62, relwidth=0.4, relheight=0.07)
+    login_button.place(relx=0.30, rely=0.53, relwidth=0.4, relheight=0.07)
     
     signup_button = Button(self.FrameLogin, text="Signup", command=self.callSignup)
     signup_button.place(relx=0.35, rely=0.75, relwidth=0.3, relheight=0.03)
