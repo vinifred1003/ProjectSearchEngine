@@ -1,3 +1,4 @@
+from ..Controller.userController import UserController
 from tkinter import *
 def donothing():
     pass
@@ -47,3 +48,16 @@ class RegistrationScreen(Toplevel):
 
         self.entryCompany = Radiobutton(self, variable=self.var,value=1 )
         self.entryCompany.place (relx=0.15, rely=0.65)
+
+        saveButton = Button(self, text="Save", command=self.saveData)
+        saveButton.place(relx=0.4, rely=0.8, relwidth=0.2, relheight=0.07)
+
+    def saveData(self):
+        name = self.entryName.get()
+        cnpjCpf = self.entryCnpjCpf.get()
+        username = self.entryUsername.get()
+        password = self.entryPassword.get()
+        company = self.var.get()
+
+        userData = UserController(name, cnpjCpf, username, password, company)
+        userData.saveData()
