@@ -1,4 +1,4 @@
-from ..Controller.userController import UserController
+from Controller.userController import UserController
 from tkinter import *
 def donothing():
     pass
@@ -43,21 +43,43 @@ class RegistrationScreen(Toplevel):
         self.entryPassword = Entry(self, bd=2, bg="white")
         self.entryPassword.place(relx=0.6, rely=0.45)
 
-        self.lbCompany = Label(self, text="Company?", fg="white", bg="gray")
+        self.lbCompany = Label(self, text="Company", fg="white", bg="gray")
         self.lbCompany.place(relx=0.2, rely=0.60)
+        
+        self.lbCompany = Label(self, text="User", fg="white", bg="gray")
+        self.lbCompany.place(relx=0.5, rely=0.60)
 
-        self.entryCompany = Radiobutton(self, variable=self.var,value=1 )
+        self.typeOfUserList=["Company", "Client"]
+        self.optionsList = StringVar()
+        
+        self.entryCompany = Radiobutton(self, variable=self.optionsList,value=self.typeOfUserList[0] )
         self.entryCompany.place (relx=0.15, rely=0.65)
+        
+        self.entryClient = Radiobutton(self, variable=self.optionsList,value=self.typeOfUserList[1] )
+        self.entryClient.place (relx=0.45, rely=0.65)
 
         saveButton = Button(self, text="Save", command=self.saveData)
         saveButton.place(relx=0.4, rely=0.8, relwidth=0.2, relheight=0.07)
 
+    def popup(self):
+        self.popupWindow = Toplevel(self.visibleWindow)
+        self.popupWindow.title("WARN")
+        self.popupWindow.geometry("200x100")
+        self.warn=Label(self.popupWindow, text="Your registration was successful")
+        self.buttomOK = Button(self.popupWindow, text="Ok", command=self.destroyWindows)
+        self.warn.pack()
+        self.buttomOK.pack()
+        self.popupWindow.mainloop()
     def saveData(self):
         name = self.entryName.get()
         cnpjCpf = self.entryCnpjCpf.get()
         username = self.entryUsername.get()
         password = self.entryPassword.get()
-        company = self.var.get()
+        typeOfUser = self.optionsList.get()
 
-        userData = UserController(name, cnpjCpf, username, password, company)
+        userData = UserController(name, cnpjCpf, username, password, typeOfUser)
         userData.saveData()
+        self.popup()
+    def destroyWindows(self):
+        self.popupWindow.destroy()
+        self.visibleWindow.destroy()
