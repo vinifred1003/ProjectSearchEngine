@@ -16,11 +16,13 @@ class UserController:
         self.userModel.create(self.name, self.cnpjCpf, self.username, self.password,self.typeOfUser)
 
 
-    def authentication(self,username, password, typeOfUser):
-        try:
-            userId = self.usersModel.authenticate(username, password,typeOfUser)
-            
-            return userId
+    def authentication(self, username, password, typeOfUser):
         
-        except Exception as e:
-            raise e                 
+        auth_result = self.userModel.authentication(username, password, typeOfUser)
+        
+        if auth_result:
+            # Autenticação bem-sucedida
+            return True
+        else:
+            # Autenticação falhou
+            return False

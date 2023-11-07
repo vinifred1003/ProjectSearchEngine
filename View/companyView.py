@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import *
 
-class ClientView():
+class CompanyView():
 
   def __init__(self):
     self.root= tk.Tk()
@@ -10,7 +10,8 @@ class ClientView():
     self.root.mainloop()
   
   def run(self):
-    self.root.title("Search")
+    self.root.title("Company Products")
     self.root.attributes('-fullscreen', True)
     self.root.resizable(True, True)
-    self.root.configure(background="#7092BE")
+    self.root.configure(background="red")
+

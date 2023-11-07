@@ -1,8 +1,13 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import font
+from tkinter import messagebox
 from .registrationScreen import RegistrationScreen
 import os
+from Controller.userController import UserController
+from .clientView import ClientView
+from .companyView import CompanyView
+
 
 class LoginScreen():
   
@@ -50,13 +55,22 @@ class LoginScreen():
     label_password = Label(self.FrameLogin, text="Password", font=self.custom_font, bg="#a0a0a0", fg="white")
     label_password.place(relx=0.25, rely=0.30, relwidth=0.5, relheight=0.05)
 
-    entry_password = Entry(self.FrameLogin, show="*")   
-    entry_password.place(relx=0.30, rely=0.40, relwidth=0.4, relheight=0.05)
+    self.entry_password = Entry(self.FrameLogin, show="*")   
+    self.entry_password.place(relx=0.30, rely=0.40, relwidth=0.4, relheight=0.05)
+
+    self.typeOfUserList=["Company", "Client"]
+    self.optionsList = StringVar()
+        
+    self.entryCompany = Radiobutton(self.FrameLogin, variable=self.optionsList,value=self.typeOfUserList[0], text="Company" )
+    self.entryCompany.place (relx=0.275, rely=0.50)
+        
+    self.entryClient = Radiobutton(self.FrameLogin, variable=self.optionsList,value=self.typeOfUserList[1], text="Client" )
+    self.entryClient.place (relx=0.575, rely=0.50)    
+
+    login_button = Button(self.FrameLogin, text="Sign in", command=self.callSignIn)
+    login_button.place(relx=0.30, rely=0.60, relwidth=0.4, relheight=0.07)
     
-    login_button = Button(self.FrameLogin, text="Sign in")
-    login_button.place(relx=0.30, rely=0.53, relwidth=0.4, relheight=0.07)
-    
-    signup_button = Button(self.FrameLogin, text="Sign up", command=self.callSignup)
+    signup_button = Button(self.FrameLogin, text="Sign up", command=self.callSignUp)
     signup_button.place(relx=0.35, rely=0.75, relwidth=0.3, relheight=0.04)
     
     exit_button = Button(self.FrameLogin, text="Exit", command=self.quit)
@@ -65,10 +79,30 @@ class LoginScreen():
   def quit(self):
     self.root.destroy()
 
-  def callSignup(self):  
+  def callSignUp(self):  
     self.root2 = Toplevel()
     self.root2.withdraw() 
     RegistrationScreen(self.root2)
+
+  def callSignIn(self):
+    username = self.entry_username.get()
+    password = self.entry_password.get()
+    typeOfUser = self.optionsList.get()  # Obtenha o tipo de usuário selecionado
+    
+    
+
+    user_controller = UserController(None, None, username, password, typeOfUser)
+
+    authenticated = user_controller.authentication(username, password, typeOfUser)
+
+    if authenticated and typeOfUser=="Client":
+      ClientView()
+      quit()
+    elif authenticated and typeOfUser=="Company":
+      CompanyView()
+      quit()
+    else:    
+      messagebox.showerror("Erro", "Nome de usuário, senha ou tipo de usuário incorretos")
   
   def close(self, evento=None):
     sys.exit()
