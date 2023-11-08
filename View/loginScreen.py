@@ -87,9 +87,7 @@ class LoginScreen():
   def callSignIn(self):
     username = self.entry_username.get()
     password = self.entry_password.get()
-    typeOfUser = self.optionsList.get()  # Obtenha o tipo de usuário selecionado
-    
-    
+    typeOfUser = self.optionsList.get() 
 
     user_controller = UserController(None, None, username, password, typeOfUser)
 
@@ -99,10 +97,10 @@ class LoginScreen():
       ClientView()
       quit()
     elif authenticated and typeOfUser=="Company":
-      CompanyView()
+      CompanyView(username)
       quit()
     else:    
-      messagebox.showerror("Erro", "Nome de usuário, senha ou tipo de usuário incorretos")
+      messagebox.showerror("Error", "Incorrect username, password or user type")
   
   def close(self, evento=None):
     sys.exit()

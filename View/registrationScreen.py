@@ -1,5 +1,6 @@
 from Controller.userController import UserController
 from tkinter import *
+from tkinter import messagebox
 def donothing():
     pass
 
@@ -61,15 +62,6 @@ class RegistrationScreen(Toplevel):
         saveButton = Button(self, text="Save", command=self.saveData)
         saveButton.place(relx=0.4, rely=0.8, relwidth=0.2, relheight=0.07)
 
-    def popup(self):
-        self.popupWindow = Toplevel(self.visibleWindow)
-        self.popupWindow.title("WARN")
-        self.popupWindow.geometry("200x100")
-        self.warn=Label(self.popupWindow, text="Your registration was successful")
-        self.buttomOK = Button(self.popupWindow, text="Ok", command=self.destroyWindows)
-        self.warn.pack()
-        self.buttomOK.pack()
-        self.popupWindow.mainloop()
     def saveData(self):
         name = self.entryName.get()
         cnpjCpf = self.entryCnpjCpf.get()
@@ -81,5 +73,5 @@ class RegistrationScreen(Toplevel):
         userData.saveData()
         self.popup()
     def destroyWindows(self):
-        self.popupWindow.destroy()
+        messagebox.showinfo("Sucess", "Successful Register")
         self.visibleWindow.destroy()
