@@ -43,21 +43,22 @@ class LoginScreen():
     self.FrameLogin = Frame(self.root, bd=4, bg="#a0a0a0",highlightbackground="black", highlightthickness=5)
     self.FrameLogin.place(relx=0.35, rely=0.10, relwidth=0.30, relheight=0.80) 
            
-    label_username = Label(self.FrameLogin, text="Username", font=self.custom_font, bg="#a0a0a0", fg="white")
+    label_username = Label(self.FrameLogin, text="Username", font=self.custom_font, bg="#a0a0a0", fg="white", )
     label_username.place(relx=0.25, rely=0.10, relwidth=0.5, relheight=0.05)
     
-    self.entry_username = Entry(self.FrameLogin)
+    self.entry_username = Entry(self.FrameLogin, text="Amz")
     self.entry_username.place(relx=0.30, rely=0.20, relwidth=0.4, relheight=0.05)
-    self.entry_username.insert(0,'Username')
+    
+    self.entry_username.insert(0,'Amz')
     self.entry_username.bind('<FocusIn>', lambda event: self.on_enter(event))
     self.entry_username.bind('<FocusOut>', lambda event: self.on_leave(event))
 
     label_password = Label(self.FrameLogin, text="Password", font=self.custom_font, bg="#a0a0a0", fg="white")
     label_password.place(relx=0.25, rely=0.30, relwidth=0.5, relheight=0.05)
-
-    self.entry_password = Entry(self.FrameLogin, show="*")   
+    
+    self.entry_password = Entry(self.FrameLogin, show="*", text="01234567")   
     self.entry_password.place(relx=0.30, rely=0.40, relwidth=0.4, relheight=0.05)
-
+    self.entry_password.insert(0,'01234567')
     self.typeOfUserList=["Company", "Client"]
     self.optionsList = StringVar()
         
@@ -75,6 +76,9 @@ class LoginScreen():
     
     exit_button = Button(self.FrameLogin, text="Exit", command=self.quit)
     exit_button.place(relx=0.35, rely=0.90, relwidth=0.3, relheight=0.04)
+  
+  def InvisibleWindow(self):
+    self.root.withdraw()
   
   def quit(self):
     self.root.destroy()
@@ -94,13 +98,13 @@ class LoginScreen():
     authenticated = user_controller.authentication(username, password, typeOfUser)
 
     if authenticated and typeOfUser=="Client":
+      self.InvisibleWindow()
       ClientView()
-      quit()
     elif authenticated and typeOfUser=="Company":
+      # self.InvisibleWindow()
       CompanyView(username)
-      quit()
     else:    
       messagebox.showerror("Error", "Incorrect username, password or user type")
   
   def close(self, evento=None):
-    sys.exit()
+    sys.exit()      

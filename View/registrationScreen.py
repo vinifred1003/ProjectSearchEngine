@@ -20,7 +20,7 @@ class RegistrationScreen(Toplevel):
         
     def labels(self):
         self.var=0
-        self.lbName = Label(self, text="Nome", fg="white", bg="gray")
+        self.lbName = Label(self, text="Name", fg="white", bg="gray")
         self.lbName.place(relx=0.1, rely=0.15)
 
         self.entryName = Entry(self, bd=2, bg="white")

@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import *
 from Controller.productController import ProductController
+from .registerProductView import RegisterProductView
 
 class CompanyView:
 
@@ -15,7 +16,6 @@ class CompanyView:
     self.update_list()
     self.root.mainloop()
     
-
   def run(self):
     self.root.title("Company Products")
     self.root.attributes('-fullscreen', True)
@@ -35,12 +35,24 @@ class CompanyView:
     self.code_entry = Entry(self.frame_header, bd=2, bg="white")
     self.code_entry.place(relx=0.2, rely=0.65)
 
-    self.update_button = Button(self.frame_header, bd=2, text="Update", command=self.update_list)
+    self.update_button = Button(self.frame_header, bd=2, text="Update", command=self.product_update)
     self.update_button.place(relx=0.20, rely=0.9, relwidth=0.07, relheight=0.12)
     
-    self.create_button = Button(self.frame_header, bd=2, text="New Product")
+    self.create_button = Button(self.frame_header, bd=2, text="New Product", command=self.register_product)
     self.create_button.place(relx=0.70, rely=0.80, relwidth=0.1, relheight=0.15)
-    
+
+  def product_update(self):
+    code_selected = self.code_entry.get()
+    if code_selected:
+      self.register_product(code_selected)
+    else:    
+      pass
+
+  def register_product(self):  
+    self.root2 = Toplevel()
+    self.root2.withdraw() 
+    RegisterProductView(self.root2, self.username, None)
+   
   def update_list(self):
     self.product_list.delete(*self.product_list.get_children())
     product_data = self.productController.read_product_data()

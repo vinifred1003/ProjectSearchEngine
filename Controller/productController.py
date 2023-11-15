@@ -6,6 +6,9 @@ class ProductController:
 
     self.model = Model(self.username, self)
     
+  def saveData(self):
+    self.model.productCreate(product_data)
+
   def read_product_data(self):
     self.model.readData(self.username)
     results = self.model.all_results

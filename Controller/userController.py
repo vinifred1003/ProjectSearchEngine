@@ -13,7 +13,7 @@ class UserController:
 
 
     def saveData(self):
-        self.model.create(self.name, self.cnpjCpf, self.username, self.password,self.typeOfUser)
+        self.model.userCreate(self.name, self.cnpjCpf, self.username, self.password,self.typeOfUser)
 
 
     def authentication(self, username, password, typeOfUser):

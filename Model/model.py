@@ -14,10 +14,11 @@ class Model:
         self.userCollection = db["userTable"]
         self.productCollection= db["ProductsTable"]
         
-        # Correção: Importe ASCENDING de pymongo
+        
         self.userCollection.create_index([('Identification', ASCENDING), ('Username', ASCENDING)], unique=True)
+        self.productCollection.create_index([('Code', ASCENDING)], unique=True)
 
-    def create(self, name, cnpjCpf, username, password, typeOfUser):
+    def userCreate(self, name, cnpjCpf, username, password, typeOfUser):
         userTable = {
             'Name': name,
             'Identification': cnpjCpf,
@@ -48,6 +49,32 @@ class Model:
             print(f"Erro na autenticação: {str(e)}")
             return False
     
+    def productCreate(self, username, name, code, brand, stock, price):
+        ProductsTable = {
+            'Username': username,
+            'Code': code,
+            'Name': name,
+            'Brand': brand,
+            'Stock': stock,
+            'Price': price
+        }
+        try:
+            self.productCollection.insert_one(ProductsTable)
+        except pymongo.errors.DuplicateKeyError as e:
+            raise Exception("This Code already exists")        
+    
+    def updateProduct(self,username, code,name, brand, stock, price):
+        code_key = {'Code': code}
+        user_key = {'Username': username}
+        combination_keys= {**code_key, **user_key}
+        new_update = {'$set': {
+            'Code': code,
+            'Name': name,
+            'Brand': brand,
+            'Stock': stock,
+            'Price': price}}
+        self.collection.update_one(combination_keys, new_update)
+
     def readData(self, username):
         cursor = self.productCollection.find({'Username': username})
         self.all_results = []
