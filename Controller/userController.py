@@ -1,4 +1,4 @@
-from Model.userModel import UserModel
+from Model.model import Model
 
 class UserController:
 
@@ -9,16 +9,16 @@ class UserController:
         self.password= password
         self.typeOfUser= typeOfUser
 
-        self.userModel = UserModel(self)
+        self.model = Model(self,username)
 
 
     def saveData(self):
-        self.userModel.create(self.name, self.cnpjCpf, self.username, self.password,self.typeOfUser)
+        self.model.create(self.name, self.cnpjCpf, self.username, self.password,self.typeOfUser)
 
 
     def authentication(self, username, password, typeOfUser):
         
-        auth_result = self.userModel.authentication(username, password, typeOfUser)
+        auth_result = self.model.authentication(username, password, typeOfUser)
         
         if auth_result:
             # Autenticação bem-sucedida

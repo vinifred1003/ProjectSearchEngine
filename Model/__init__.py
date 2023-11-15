@@ -1,1 +1,1 @@
-from .userModel import * 
+from .model import * 

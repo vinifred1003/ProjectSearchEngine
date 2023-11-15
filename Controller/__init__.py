@@ -1,1 +1,2 @@
-from .userController import * 
+from .userController import *
+from .productController import * 
