@@ -83,6 +83,10 @@ class LoginScreen():
   def quit(self):
     self.root.destroy()
 
+  def destroyWindows(self):
+    messagebox.showinfo("Sucess", "Successful Register")
+    self.root.destroy()  
+
   def callSignUp(self):  
     self.root2 = Toplevel()
     self.root2.withdraw() 
@@ -101,8 +105,8 @@ class LoginScreen():
       self.InvisibleWindow()
       ClientView()
     elif authenticated and typeOfUser=="Company":
-      # self.InvisibleWindow()
       CompanyView(username)
+      # self.destroyWindows()
     else:    
       messagebox.showerror("Error", "Incorrect username, password or user type")
   

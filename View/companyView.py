@@ -14,6 +14,7 @@ class CompanyView:
     self.products()
     self.productController = ProductController(username)
     self.update_list()
+    
     self.root.mainloop()
     
   def run(self):
@@ -26,7 +27,7 @@ class CompanyView:
     self.frame_header = Frame(self.root, bd=4, bg="light gray")
     self.frame_header.place(relx=0, rely=0, relwidth=1, relheight=0.3)
 
-    self.delete_button = Button(self.frame_header, bd=2, text="Delete")
+    self.delete_button = Button(self.frame_header, bd=2, text="Delete", command=self.delete)
     self.delete_button.place(relx=0.3, rely=0.9, relwidth=0.07, relheight=0.12)
 
     self.lb_code = Label(self.frame_header, text="Code", fg="white", bg="black")
@@ -40,19 +41,42 @@ class CompanyView:
     
     self.create_button = Button(self.frame_header, bd=2, text="New Product", command=self.register_product)
     self.create_button.place(relx=0.70, rely=0.80, relwidth=0.1, relheight=0.15)
+    
+    self.exit_button = Button(self.root, bd=2, text="Exit", command=self.quit)
+    self.exit_button.place(relx=0.85, rely=0.90, relwidth=0.07, relheight=0.03)
 
   def product_update(self):
     code_selected = self.code_entry.get()
     if code_selected:
-      self.register_product(code_selected)
+      self.root2 = Toplevel()
+      self.root2.withdraw() 
+      RegisterProductView(self.root2, self.username, code_selected, self)
     else:    
       pass
+
+  def entry_clean(self):
+    self.code_entry.delete(0, END)
+
+  def double_click(self,event):
+    self.entry_clean()
+    selected_item = self.product_list.selection()
+    if selected_item:
+      col1_value = self.product_list.item(selected_item, 'values')[0]
+      self.code_entry.insert(END, col1_value)
+    else:
+      messagebox.showwarning("Aviso", "Nenhuma linha selecionada")
 
   def register_product(self):  
     self.root2 = Toplevel()
     self.root2.withdraw() 
-    RegisterProductView(self.root2, self.username, None)
-   
+    RegisterProductView(self.root2, self.username, None, self)
+    
+  def delete(self):
+    code = self.code_entry.get()
+    PC= ProductController(self.username)
+    PC.delete(code,self.username)
+    self.update_list()
+
   def update_list(self):
     self.product_list.delete(*self.product_list.get_children())
     product_data = self.productController.read_product_data()
@@ -84,3 +108,7 @@ class CompanyView:
       self.scrollproduct_list = Scrollbar(self.frame_products, orient_='vertical')
       self.product_list.configure(yscroll=self.scrollproduct_list.set)
       self.scrollproduct_list.place(relx=0.98, rely=0.05, relwidth=0.015, relheight=0.9)
+      self.product_list.bind("<Double-1>", self.double_click)
+  
+  def quit(self):
+    self.root.destroy()    

@@ -49,36 +49,47 @@ class Model:
             print(f"Erro na autenticação: {str(e)}")
             return False
     
-    def productCreate(self, username, name, code, brand, stock, price):
+    def productCreate(self, productData):
         ProductsTable = {
-            'Username': username,
-            'Code': code,
-            'Name': name,
-            'Brand': brand,
-            'Stock': stock,
-            'Price': price
+            'Username': productData[0],
+            'Code': productData[1],
+            'Name': productData[2],
+            'Brand': productData[3],
+            'Stock': productData[4],
+            'Price': productData[5]
         }
         try:
             self.productCollection.insert_one(ProductsTable)
         except pymongo.errors.DuplicateKeyError as e:
             raise Exception("This Code already exists")        
-    
-    def updateProduct(self,username, code,name, brand, stock, price):
-        code_key = {'Code': code}
-        user_key = {'Username': username}
+
+    def updateProduct(self, productData):
+        code_key = {'Code': productData[1]}
+        user_key = {'Username': productData[0]}
         combination_keys= {**code_key, **user_key}
         new_update = {'$set': {
-            'Code': code,
-            'Name': name,
-            'Brand': brand,
-            'Stock': stock,
-            'Price': price}}
-        self.collection.update_one(combination_keys, new_update)
+            'Name': productData[2],
+            'Brand': productData[3],
+            'Stock': productData[4],
+            'Price': productData[5]}}
+        self.productCollection.update_one(combination_keys, new_update)
 
     def readData(self, username):
         cursor = self.productCollection.find({'Username': username})
         self.all_results = []
         for document in cursor:
             self.all_results.append(dict(document))
-
+    
+    def readOneData(self, username, code):
+        cursor = self.productCollection.find_one({'Username': username, 'Code':code})
+        if cursor:
+            self.result_dict=dict(cursor)
+            return self.result_dict
+        else:
+            return None
+    def productDelete(self,code,username):
+        code_key = {'Code': code}
+        user_key = {'Username': username}
+        combination_keys= {**code_key, **user_key}
         
+        self.productCollection.delete_one(combination_keys)
