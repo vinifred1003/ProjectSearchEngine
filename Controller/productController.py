@@ -39,3 +39,31 @@ class ProductController:
 
   def update(self, productData):
     self.model.updateProduct(productData)
+
+  def search(self,name_searched):
+    self.model.readClientProduct(name_searched)
+    results_product = self.model.product_results
+    results_user = self.model.user_results
+    final_result=[]
+    products_data = []
+    
+    for dict1 in results_product:
+        username1 = dict1.get("Username")
+        for dict2 in results_user:
+            username2 = dict2.get("Username")
+            if username1 == username2:
+                dict1["BusinessName"] = dict2.get("BusinessName", username2)
+                final_result.append(dict1)
+    
+    for product_searched in final_result:
+      code = product_searched.get('Code')
+      name = product_searched.get('Name')
+      brand = product_searched.get('Brand')
+      stock = product_searched.get('Stock')
+      price = product_searched.get('Price')
+      company = product_searched.get('BusinessName')
+
+
+      products_data.append((f'{code}',f'{name}',f'{brand}',f'{stock}',f'{price}',f'{company}'))
+      
+    return products_data

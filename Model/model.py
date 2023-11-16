@@ -20,7 +20,7 @@ class Model:
 
     def userCreate(self, name, cnpjCpf, username, password, typeOfUser):
         userTable = {
-            'Name': name,
+            'BusinessName': name,
             'Identification': cnpjCpf,
             'Username': username,
             'Password': password,
@@ -93,3 +93,14 @@ class Model:
         combination_keys= {**code_key, **user_key}
         
         self.productCollection.delete_one(combination_keys)
+
+    def readClientProduct(self,name_searched):
+        product_cursor = self.productCollection.find({'Name': name_searched})
+        user_cursor = self.userCollection.find({})
+        
+        self.product_results = []
+        self.user_results = []
+        for i in product_cursor:
+            self.product_results.append(dict(i))
+        for j in user_cursor:
+            self.user_results.append(dict(j))

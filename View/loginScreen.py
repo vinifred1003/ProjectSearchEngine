@@ -49,7 +49,7 @@ class LoginScreen():
     self.entry_username = Entry(self.FrameLogin, text="Amz")
     self.entry_username.place(relx=0.30, rely=0.20, relwidth=0.4, relheight=0.05)
     
-    self.entry_username.insert(0,'Amz')
+    self.entry_username.insert(0,'vini')
     self.entry_username.bind('<FocusIn>', lambda event: self.on_enter(event))
     self.entry_username.bind('<FocusOut>', lambda event: self.on_leave(event))
 
@@ -58,7 +58,7 @@ class LoginScreen():
     
     self.entry_password = Entry(self.FrameLogin, show="*", text="01234567")   
     self.entry_password.place(relx=0.30, rely=0.40, relwidth=0.4, relheight=0.05)
-    self.entry_password.insert(0,'01234567')
+    self.entry_password.insert(0,'12345')
     self.typeOfUserList=["Company", "Client"]
     self.optionsList = StringVar()
         
@@ -102,7 +102,7 @@ class LoginScreen():
     authenticated = user_controller.authentication(username, password, typeOfUser)
 
     if authenticated and typeOfUser=="Client":
-      self.InvisibleWindow()
+      # self.InvisibleWindow()
       ClientView()
     elif authenticated and typeOfUser=="Company":
       CompanyView(username)
