@@ -79,7 +79,7 @@ class CompanyView:
 
   def update_list(self):
     self.product_list.delete(*self.product_list.get_children())
-    product_data = self.productController.read_client_product()
+    product_data = self.productController.read_product_data()
     for i in product_data:
       self.product_list.insert('', tk.END, values=i)
 

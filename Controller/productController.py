@@ -7,8 +7,10 @@ class ProductController:
     self.model = Model(self.username, self)
     
   def saveData(self, productData):
-    self.model.productCreate(productData)
-
+    try:
+      self.model.productCreate(productData)
+    except Exception as e:
+      raise e    
   def delete(self,code, username):
     self.model.productDelete(code,self.username)   
 

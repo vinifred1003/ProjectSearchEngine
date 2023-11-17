@@ -46,19 +46,17 @@ class LoginScreen():
     label_username = Label(self.FrameLogin, text="Username", font=self.custom_font, bg="#a0a0a0", fg="white", )
     label_username.place(relx=0.25, rely=0.10, relwidth=0.5, relheight=0.05)
     
-    self.entry_username = Entry(self.FrameLogin, text="Amz")
+    self.entry_username = Entry(self.FrameLogin, text="username")
     self.entry_username.place(relx=0.30, rely=0.20, relwidth=0.4, relheight=0.05)
     
-    self.entry_username.insert(0,'vini')
     self.entry_username.bind('<FocusIn>', lambda event: self.on_enter(event))
     self.entry_username.bind('<FocusOut>', lambda event: self.on_leave(event))
 
     label_password = Label(self.FrameLogin, text="Password", font=self.custom_font, bg="#a0a0a0", fg="white")
     label_password.place(relx=0.25, rely=0.30, relwidth=0.5, relheight=0.05)
     
-    self.entry_password = Entry(self.FrameLogin, show="*", text="01234567")   
+    self.entry_password = Entry(self.FrameLogin, show="*", text="password")   
     self.entry_password.place(relx=0.30, rely=0.40, relwidth=0.4, relheight=0.05)
-    self.entry_password.insert(0,'12345')
     self.typeOfUserList=["Company", "Client"]
     self.optionsList = StringVar()
         

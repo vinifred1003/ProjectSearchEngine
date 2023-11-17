@@ -85,9 +85,15 @@ class RegisterProductView(Toplevel):
         if self.code_selected:
             PD.update(productData)
         else:
-            PD.saveData(productData)
-        self.company_view.update_list()
-        self.destroyWindows()
+            try:
+                PD.saveData(productData)
+                self.destroyWindows()
+                self.company_view.update_list()
+            except Exception as e:
+                messagebox.showerror("Error",f"Error: {e}")
+                
+        
+        
     
     def destroyWindows(self):
         messagebox.showinfo("Sucess", "Successful Register")

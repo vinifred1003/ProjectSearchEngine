@@ -15,8 +15,8 @@ class Model:
         self.productCollection= db["ProductsTable"]
         
         
-        self.userCollection.create_index([('Identification', ASCENDING), ('Username', ASCENDING)], unique=True)
-        self.productCollection.create_index([('Code', ASCENDING)], unique=True)
+        self.userCollection.create_index([ ('Username', ASCENDING)], unique=True)
+        self.productCollection.create_index([('Code', ASCENDING), ('Username', ASCENDING)], unique=True)
 
     def userCreate(self, name, cnpjCpf, username, password, typeOfUser):
         userTable = {
@@ -29,7 +29,7 @@ class Model:
         try:
             self.userCollection.insert_one(userTable)
         except pymongo.errors.DuplicateKeyError as e:
-            raise Exception("This Username or CPF or CNPJ already exists")
+            raise Exception("This Username already exist")
 
     def authentication(self, username, password, typeOfUser):
         try:

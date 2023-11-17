@@ -68,10 +68,14 @@ class RegistrationScreen(Toplevel):
         username = self.entryUsername.get()
         password = self.entryPassword.get()
         typeOfUser = self.optionsList.get()
-
         userData = UserController(name, cnpjCpf, username, password, typeOfUser)
-        userData.saveData()
-        self.popup()
+        CustomDuplicateKeyError= ""
+        try:
+            userData.saveData()
+            self.destroyWindows()
+        except Exception as e:
+            messagebox.showerror("Error",f"Error: {e}")       
+        
     def destroyWindows(self):
         messagebox.showinfo("Sucess", "Successful Register")
         self.visibleWindow.destroy()
