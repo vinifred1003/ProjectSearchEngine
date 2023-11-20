@@ -1,0 +1,30 @@
+[{
+  "_id": {
+    "$oid": "6548eb67d75cdd7f1f3f6425"
+  },
+  "Identification": "123456789",
+  "Username": "vini",
+  "Password": "12345",
+  "TypeOfUser": "Client",
+  "BusinessName": "Vinicius"
+},
+{
+  "_id": {
+    "$oid": "6548ec6b2673c4e5afcfd05f"
+  },
+  "Identification": "0123456789",
+  "Username": "Amz",
+  "Password": "01234567",
+  "TypeOfUser": "Company",
+  "BusinessName": "Amazon"
+},
+{
+  "_id": {
+    "$oid": "6548f0c8f9c8f8405d7f99ec"
+  },
+  "Identification": "0123457894",
+  "Username": "MLuisa",
+  "Password": "0123456",
+  "TypeOfUser": "Company",
+  "BusinessName": "MagazineLuisa"
+}]

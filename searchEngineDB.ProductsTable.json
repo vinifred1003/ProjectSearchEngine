@@ -1,0 +1,66 @@
+[{
+  "_id": {
+    "$oid": "6548eb67d75cdd7f1f3f6425"
+  },
+  "Username": "Amz",
+  "Code": "123456789",
+  "Name": "Television",
+  "Brand": "Sansung",
+  "Stock": "20",
+  "Price": "3000.00"
+},
+{
+  "_id": {
+    "$oid": "65527bdd1d9e2d128b77ec51"
+  },
+  "Username": "MLuisa",
+  "Code": "84759635",
+  "Name": "IPhone",
+  "Brand": "Apple",
+  "Stock": "20",
+  "Price": "4000,00"
+},
+{
+  "_id": {
+    "$oid": "6553b9fac7e2b762ed9e2da6"
+  },
+  "Username": "Amz",
+  "Code": "598874465",
+  "Name": "Laptop",
+  "Brand": "Acer",
+  "Stock": "15",
+  "Price": "1500.00"
+},
+{
+  "_id": {
+    "$oid": "6553d087c7e2b762ed9e2da7"
+  },
+  "Username": "MLuisa",
+  "Code": "6518465165",
+  "Name": "Liquidificador",
+  "Brand": "Oster",
+  "Stock": "100",
+  "Price": "150,00"
+},
+{
+  "_id": {
+    "$oid": "65562f5e6ad0dbcae78cb727"
+  },
+  "Username": "Amz",
+  "Code": "1636652262",
+  "Name": "Mixer",
+  "Brand": "BLACK+DECKER",
+  "Stock": "10",
+  "Price": "319.00"
+},
+{
+  "_id": {
+    "$oid": "6556706c6a03622fc2479d83"
+  },
+  "Username": "Amz",
+  "Code": "2316845626",
+  "Name": "Calculator",
+  "Brand": "Casio",
+  "Stock": "100",
+  "Price": "21.00"
+}]
