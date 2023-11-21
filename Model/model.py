@@ -95,7 +95,7 @@ class Model:
         self.productCollection.delete_one(combination_keys)
 
     def readClientProduct(self,name_searched):
-        product_cursor = self.productCollection.find({'Name': name_searched})
+        product_cursor = self.productCollection.find({'Name': {'$regex': f".*{name_searched}.*"}})
         user_cursor = self.userCollection.find({})
         
         self.product_results = []
